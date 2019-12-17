@@ -37,9 +37,10 @@
 	#form {
 		width: 30rem;
 		max-width: 100%;
+		margin:1rem 0;
 	}
 </style>
-<div id="form">
+<form id="form">
 	<div class="form-control">
 		<label for="userName">User Name</label>
 		<input type="text" bind:value={name} id="userName" />
@@ -56,11 +57,16 @@
 		<label for="desc">Description</label>
 		<textarea rows="3" bind:value={description} id="desc" />
 	</div>
-</div>
+	<button on:click|preventDefault={ addContact } type="summit">Add Contact Card</button>
+</form>
 
-<button on:click={ addContact }>Add Contact Card</button>
-<button on:click={ deleteFirst }>Delete First</button>
-<button on:click={ deleteLast }>Delete Last</button>
+
+<button on:click={ (event) => {
+	createContacts = createContacts.slice(1);
+} }>Delete First</button>
+<button on:click={ () => {
+	createContacts = createContacts.slice(0, -1);
+} }>Delete Last</button>
 
 {#if formState == 'invalid'}
 <p>Invalid Input</p>
